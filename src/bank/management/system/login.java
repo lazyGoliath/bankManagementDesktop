@@ -99,7 +99,8 @@ public class login extends JFrame implements ActionListener {
             cardTextField.setText("");
             pinTextField.setText("");
         } else if(e.getSource() == signup){
-
+            setVisible(false);
+            new SignUpOne().setVisible(true);
         } else if(e.getSource() == login){
 
         }
