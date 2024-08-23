@@ -221,6 +221,11 @@ public class SignUpTwo extends JFrame implements ActionListener {
                 } else {
                     System.out.println("Error executing query");
                 }
+
+                //if successful hit to the database, then move to next form
+                setVisible(false);
+                new SignUp3(formno).setVisible(true);
+
                 c.closeConnection();
             }
 
