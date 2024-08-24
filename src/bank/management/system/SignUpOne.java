@@ -248,6 +248,7 @@ public class SignUpOne extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please enter your pin");
             } else { //if all criteria met, pass data to database
                 Conn c = new Conn();
+                //dml command -> data manipulation
                 String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+maritalStatus+"', '"+address+"', '"+city+"', '"+state+"', '"+pin+"')";
                 int result = c.executeQuery(query);
                 if (result > 0) {

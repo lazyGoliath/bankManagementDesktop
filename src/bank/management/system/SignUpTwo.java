@@ -214,6 +214,7 @@ public class SignUpTwo extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please enter your Aadhar Number");
             } else { //if all criteria met, pass data to database
                 Conn c = new Conn();
+                //dml command
                 String query = "insert into signup2 values('"+formno+"', '"+sReligion+"', '"+sCategory+"', '"+sEducation+"', '"+sIncome+"', '"+sOccupation+"', '"+isSenior+"', '"+isExisting+"', '"+pan+"', '"+aadhar+"')";
                 int result = c.executeQuery(query);
                 if (result > 0) {

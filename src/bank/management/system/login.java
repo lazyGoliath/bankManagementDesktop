@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;   //interface to add actions to buttons
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class login extends JFrame implements ActionListener {
 
@@ -61,7 +66,7 @@ public class login extends JFrame implements ActionListener {
         pinTextField.setFont(new Font("Arial", Font.BOLD, 16));
         add(pinTextField);
 
-        //add a sign in button
+        //add a sign-in button
         login = new JButton("SIGN IN");
         login.setBounds(300, 300, 100, 30);
         login.setBackground(Color.BLACK);  //set button background color
@@ -94,15 +99,35 @@ public class login extends JFrame implements ActionListener {
     //@Important
     //added to override actionPerformed() abstract method defined in ActionListener interface
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == clear){
+    public void actionPerformed(ActionEvent ae) {
+        if(ae.getSource() == clear){
             cardTextField.setText("");
             pinTextField.setText("");
-        } else if(e.getSource() == signup){
+            System.out.println("CLEARED");  //debug statement
+        } else if(ae.getSource() == signup){
             setVisible(false);
             new SignUpOne().setVisible(true);
-        } else if(e.getSource() == login){
+        } else if(ae.getSource() == login){
+            Conn c = new Conn();
+            String cardNumber = cardTextField.getText();
+            String pin = Arrays.toString(pinTextField.getPassword());
+            //ddl command select query -> collecting data back from the database
+            String query = "select * from login where cardNum = '"+cardNumber+"' and pinNum = '"+pin+"'";
+            System.out.println("INVALID CARD NUMBER");  //debug statement
 
+            //hitting external database
+            try {
+                ResultSet rs = c.s.executeQuery(query);
+                if(rs.next()){  //if user inputs correct data
+                    setVisible(false);
+                    new Transactions(pin).setVisible(true);
+                } else{  //if user enters wrong data
+                    JOptionPane.showMessageDialog(null, "Invalid Card or Pin Number");
+                }
+            } catch (SQLException e) { // unable to collect data from database
+                Logger.getLogger(SignUpOne.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "Database error. Please try again.");
+            }
         }
     }
 

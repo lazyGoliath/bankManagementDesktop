@@ -216,6 +216,7 @@ public class SignUp3 extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Please select type of service you want");
                 } else { //if all criteria met, pass data to database
                     Conn c = new Conn();
+                    //dml command
                     String query1 = "insert into signup3 values('" + type + "', '" + cardNum + "', '" + pinNum + "', '" + facility + "', '" + formno + "')";
                     String query2 = "insert into login values('"+ cardNum + "', '" + pinNum + "', '" + formno + "')";
 
@@ -227,7 +228,7 @@ public class SignUp3 extends JFrame implements ActionListener {
                         System.out.println("Error executing query");
                     }
 
-                    JOptionPane.showMessageDialog(null, "Card Number "+cardNum+"\n Pin Number "+pinNum);
+                    JOptionPane.showMessageDialog(null, "Account Created Successfully!!\n Card Number "+cardNum+"\n Pin Number "+pinNum);
                     c.closeConnection();
                 }
 
