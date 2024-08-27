@@ -17,6 +17,7 @@ public class Deposit extends JFrame implements ActionListener {
     public Deposit(String pin){
 
         this.pin = pin;
+        System.out.println("Pin = "+pin);  //debug statement
 
         setTitle("Deposit");
 
@@ -104,7 +105,7 @@ public class Deposit extends JFrame implements ActionListener {
         } else if(ae.getSource() == back){
             System.out.println("Go Back to Transactions Page");
             setVisible(false);
-            new Transactions("").setVisible(true);
+            new Transactions(pin).setVisible(true);
         }
     }
     public static void main(String[] args) {

@@ -13,6 +13,7 @@ public class Transactions extends JFrame implements ActionListener {
     public Transactions(String pin) {
 
         this.pin = pin;
+        System.out.println("Pin = "+pin);  //debug statement
 
         setTitle("Transactions");
 
@@ -141,6 +142,7 @@ public class Transactions extends JFrame implements ActionListener {
         } else if (ae.getSource() == enquiry) {
             System.out.println("Go to Enquiry Page");  //debug statement
             setVisible(false);
+            new BalanceEnquiry(pin).setVisible(true);
         } else if (ae.getSource() == exit) {
             System.exit(0);
         }

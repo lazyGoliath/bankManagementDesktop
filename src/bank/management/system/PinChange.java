@@ -15,6 +15,7 @@ public class PinChange extends JFrame implements ActionListener {
 
     public PinChange(String pin){
         this.pin = pin;
+        System.out.println("Pin = "+pin);  //debug statement
 
         setTitle("change pin");
 

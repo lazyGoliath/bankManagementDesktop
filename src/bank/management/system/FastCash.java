@@ -19,6 +19,7 @@ public class FastCash extends JFrame implements ActionListener {
     public FastCash(String pin) {
 
         this.pin = pin;
+        System.out.println("Pin = "+pin);  //debug statement
 
         setTitle("Transactions");
 
@@ -132,8 +133,12 @@ public class FastCash extends JFrame implements ActionListener {
             setVisible(false);
             new Transactions(pin).setVisible(true);
         } else {
-            String amount = ((JButton) ae.getSource()).getText();  //Rs. 500
-            amount = amount.substring(4);  //500
+            String amount = ((JButton) ae.getSource()).getText();  //Rs. 1,000
+            System.out.println("Amount = "+amount);  //debug statement
+            amount = amount.substring(4);  //1,000
+            amount = amount.replace(",","");  //1000
+
+            System.out.println("Fine tuned Amount = "+amount);  //debug statement
             String query = "select * from bank where pin = '"+pin+"'";
             try{
                 Conn c = new Conn();
@@ -142,13 +147,23 @@ public class FastCash extends JFrame implements ActionListener {
                 //find total bank balance from bank table
                 int balance = 0;
                 while(rs.next()){
+                    System.out.println("Type: " + rs.getString("type"));  //debug statement
+                    System.out.println("Amount: " + rs.getString("amount"));  //debug statement
+
                     if(rs.getString("type").equals("Deposit")){
                         //fetch data from bank table under amount column
+                        System.out.println("Table transaction Amount = "+rs.getString("amount"));  //debug statement
                         balance += Integer.parseInt(rs.getString("amount"));
+                        System.out.println("Balance (deposit): " + balance);  //debug statement
                     } else if(rs.getString("type").equals("Withdraw")){
+                        System.out.println("Table transaction Amount = "+rs.getString("amount"));  //debug statement
                         balance -= Integer.parseInt(rs.getString("amount"));
+                        System.out.println("Balance (deposit): " + balance);  //debug statement
                     }
                 }
+
+                System.out.println("Balance = "+balance);  //debug statement
+                System.out.println("Withdraw amount = "+Integer.parseInt(amount));  //debug statement
 
                 if(ae.getSource() != exit && balance < Integer.parseInt(amount)){
                     JOptionPane.showMessageDialog(null, "Insufficient balance");
@@ -157,7 +172,7 @@ public class FastCash extends JFrame implements ActionListener {
 
                 //add current withdrawal transaction to the records
                 Date date = new Date();
-                String query1 = "insert into bank values('"+pin+"','"+date+"','Withdrawal', '"+amount+"')";
+                String query1 = "insert into bank values('"+pin+"','"+date+"','Withdraw', '"+amount+"')";
 
                 int result = c.executeQuery(query1);
                 if (result > 0) {

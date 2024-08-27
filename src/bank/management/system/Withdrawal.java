@@ -17,6 +17,7 @@ public class Withdrawal extends JFrame implements ActionListener {
     public Withdrawal(String pin){
 
         this.pin = pin;
+        System.out.println("Pin = "+pin);  //debug statement
 
         setTitle("Withdraw");
 
@@ -81,7 +82,7 @@ public class Withdrawal extends JFrame implements ActionListener {
             } else{
                 try{
                     Conn c = new Conn();
-                    String query = "insert into bank values('"+pin+"','"+date+"','Withdrawal', '"+number+"')";
+                    String query = "insert into bank values('"+pin+"','"+date+"','Withdraw', '"+number+"')";
                     int result = c.executeQuery(query);
                     if (result > 0) {
                         System.out.println("Query executed successfully");
@@ -104,7 +105,7 @@ public class Withdrawal extends JFrame implements ActionListener {
         } else if(ae.getSource() == back){
             System.out.println("Go Back to Transactions Page");
             setVisible(false);
-            new Transactions("").setVisible(true);
+            new Transactions(pin).setVisible(true);
         }
     }
     public static void main(String[] args) {
