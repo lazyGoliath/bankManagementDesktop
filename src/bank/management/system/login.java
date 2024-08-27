@@ -35,7 +35,7 @@ public class login extends JFrame implements ActionListener {
         JLabel image = new JLabel(i3);
 
         image.setBounds(70, 10, 100, 100);  //set up a custom layout
-        add(image);  //inserts image object on frame
+        add(image);  //inserts an image object on frame
 
         //making another label for welcome text
         JLabel text = new JLabel("Welcome to ATM");
@@ -92,8 +92,9 @@ public class login extends JFrame implements ActionListener {
 
 
         setSize(800, 480);
-        setVisible(true);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     //@Important
@@ -110,15 +111,16 @@ public class login extends JFrame implements ActionListener {
         } else if(ae.getSource() == login){
             Conn c = new Conn();
             String cardNumber = cardTextField.getText();
-            String pin = Arrays.toString(pinTextField.getPassword());
-            //ddl command select query -> collecting data back from the database
-            String query = "select * from login where cardNum = '"+cardNumber+"' and pinNum = '"+pin+"'";
-            System.out.println("INVALID CARD NUMBER");  //debug statement
+            String pin = String.valueOf(pinTextField.getPassword());
+            System.out.println(cardNumber+" "+pin);  //debug statement
+            //ddl command select query → collecting data back from the database
+            String query = "select * from login where cardNum = '"+cardNumber+"' and pinNum = '"+pin+"';";
 
-            //hitting external database
+            //hitting an external database
             try {
                 ResultSet rs = c.s.executeQuery(query);
-                if(rs.next()){  //if user inputs correct data
+                System.out.println(rs);
+                if(rs.next()){  //if a user inputs correct data
                     setVisible(false);
                     new Transactions(pin).setVisible(true);
                 } else{  //if user enters wrong data
@@ -132,6 +134,7 @@ public class login extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
+
         new login();
     }
 }

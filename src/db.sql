@@ -28,3 +28,16 @@ create table login(cardNum varchar(25), pinNum varchar(10), formno varchar(20));
 show tables;
 
 select * from signup3;
+
+--create new table to keep record of all transactions
+create table bank(pin varchar(10), date varchar(20), type varchar(20), amount varchar(20));  --error in data var size
+
+drop table bank;
+
+create table bank(pin varchar(10), date varchar(50), type varchar(20), amount varchar(20));
+
+-- update pin in bank, signup3 and login tables
+update bank set pin = 'rpin' where pin = 'pin';
+update login set pinNum = 'rpin' where pinNum = 'pin';
+update signup3 set pinNum = 'rpin' where pinNum = 'pin';
+

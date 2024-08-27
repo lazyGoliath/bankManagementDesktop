@@ -117,20 +117,30 @@ public class Transactions extends JFrame implements ActionListener {
 
         setSize(900, 900);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == deposit) {
-
+            System.out.println("Go to Deposit Page"); //debug statement
+            setVisible(false);
+            new Deposit(pin).setVisible(true);
         } else if (ae.getSource() == withdraw) {
-
+            System.out.println("Go to Withdrawal Page");  //debug statement
+            setVisible(false);
+            new Withdrawal(pin).setVisible(true);
         } else if (ae.getSource() == fastcash) {
-
+            System.out.println("Go to Fast Cash Page");  //debug statement
+            setVisible(false);
+            new FastCash(pin).setVisible(true);
         } else if (ae.getSource() == pinCh) {
-
+            System.out.println("Go to Change Pin Page");  //debug statement
+            setVisible(false);
+            new PinChange(pin).setVisible(true);
         } else if (ae.getSource() == enquiry) {
-
+            System.out.println("Go to Enquiry Page");  //debug statement
+            setVisible(false);
         } else if (ae.getSource() == exit) {
             System.exit(0);
         }
