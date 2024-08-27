@@ -184,11 +184,7 @@ public class SignUpOne extends JFrame implements ActionListener {
         pincodeTextField.setFont(new Font("Raleway",Font.BOLD,20));
         add(pincodeTextField);
 
-        setSize(850,800);
-        setVisible(true);
-        setLocation(500,100);
-        getContentPane().setBackground(Color.WHITE);
-
+        //next button
         next = new JButton("Next");
         next.setBounds(360, 700, 150, 30);
         next.setBackground(Color.GREEN);
@@ -196,6 +192,11 @@ public class SignUpOne extends JFrame implements ActionListener {
         next.setForeground(Color.WHITE);
         next.addActionListener(this);
         add(next);
+
+        setSize(850,800);
+        setLocation(500,100);
+        getContentPane().setBackground(Color.WHITE);
+        setVisible(true);
     }
 
     public void actionPerformed(ActionEvent ae){
@@ -227,9 +228,9 @@ public class SignUpOne extends JFrame implements ActionListener {
         String state = stateTextField.getText();
         String pin = pincodeTextField.getText();
 
-        //hitting external database
+        //hitting an external database
         try {
-            //checking if user input meet all criteria
+            //checking if user input meets all criteria
             if(name.isEmpty()){  //if name text field is empty
                 JOptionPane.showMessageDialog(null, "Please enter your name");
             } else if(fname.isEmpty()){
@@ -246,7 +247,7 @@ public class SignUpOne extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please enter your state");
             } else if(pin.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please enter your pin");
-            } else { //if all criteria met, pass data to database
+            } else { //if all criteria met, pass data to a database
                 Conn c = new Conn();
                 //dml command -> data manipulation
                 String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+maritalStatus+"', '"+address+"', '"+city+"', '"+state+"', '"+pin+"')";
@@ -256,13 +257,12 @@ public class SignUpOne extends JFrame implements ActionListener {
                 } else {
                     System.out.println("Error executing query");
                 }
-                //if successful hit to the database, then move to next form
+                //if successful hit to the database, then move to the next form
                 setVisible(false);
                 new SignUpTwo(formno).setVisible(true);
 
                 c.closeConnection();
             }
-
         } catch (Exception e) {
             Logger.getLogger(SignUpOne.class.getName()).log(Level.SEVERE, null, e);
         }

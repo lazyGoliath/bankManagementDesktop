@@ -166,9 +166,9 @@ public class SignUp3 extends JFrame implements ActionListener {
         add(cancel);
 
         setSize(850,800);
-        setVisible(true);
         setLocation(500,100);
         getContentPane().setBackground(Color.WHITE);
+        setVisible(true);
     }
 
     @Override
@@ -205,16 +205,16 @@ public class SignUp3 extends JFrame implements ActionListener {
                 facility += "E-STATEMENT ";
             }
 
-            //hitting external database
+            //hitting an external database
             try {
-                //checking if user input meet all criteria
+                //checking if user input meets all criteria
                 if (!c7.isSelected()) {  //if name text field is empty
                     JOptionPane.showMessageDialog(null, "Please accept terms and conditions before proceeding.");
                 } else if (type == null) {
                     JOptionPane.showMessageDialog(null, "Please select type of account");
                 } else if (facility.equals(" ")) {
                     JOptionPane.showMessageDialog(null, "Please select type of service you want");
-                } else { //if all criteria met, pass data to database
+                } else { //if all criteria met, pass data to a database
                     Conn c = new Conn();
                     //dml command
                     String query1 = "insert into signup3 values('" + type + "', '" + cardNum + "', '" + pinNum + "', '" + facility + "', '" + formno + "')";
@@ -228,17 +228,19 @@ public class SignUp3 extends JFrame implements ActionListener {
                         System.out.println("Error executing query");
                     }
 
-                    JOptionPane.showMessageDialog(null, "Account Created Successfully!!\n Card Number "+cardNum+"\n Pin Number "+pinNum);
+                    JOptionPane.showMessageDialog(null, "Account Created Successfully!!\n Card Number "+
+                            cardNum+"\n Pin Number "+pinNum+"\n Moving you to Transactions Page.");
                     c.closeConnection();
-                }
 
+                    new Transactions(pinNum).setVisible(true);
+                }
             } catch (Exception e) {
                 Logger.getLogger(SignUpOne.class.getName()).log(Level.SEVERE, null, e);
             }
+        } else if(ae.getSource() == cancel){
+            setVisible(false);
+            new login().setVisible(true);
         }
-//        } else if(ae.getSource() == cancel){
-//
-//        }
     }
 
     public static void main(String[] args) {

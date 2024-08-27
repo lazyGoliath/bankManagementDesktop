@@ -164,12 +164,7 @@ public class SignUpTwo extends JFrame implements ActionListener {
         egroup.add(syes);
         egroup.add(sno);
 
-
-        setSize(850,800);
-        setVisible(true);
-        setLocation(500,100);
-        getContentPane().setBackground(Color.WHITE);
-
+        //next button
         next = new JButton("Next");
         next.setBounds(360, 700, 150, 30);
         next.setBackground(Color.GREEN);
@@ -177,6 +172,11 @@ public class SignUpTwo extends JFrame implements ActionListener {
         next.setForeground(Color.WHITE);
         next.addActionListener(this);
         add(next);
+
+        setSize(850,800);
+        setLocation(500,100);
+        getContentPane().setBackground(Color.WHITE);
+        setVisible(true);
     }
 
     public void actionPerformed(ActionEvent ae){
@@ -205,9 +205,9 @@ public class SignUpTwo extends JFrame implements ActionListener {
         String aadhar = aadharTextField.getText();
 
 
-        //hitting external database
+        //hitting an external database
         try {
-            //checking if user input meet all criteria
+            //checking if user input meets all criteria
             if(pan.isEmpty()){  //if name text field is empty
                 JOptionPane.showMessageDialog(null, "Please enter your pan number");
             } else if(aadhar.isEmpty()){
