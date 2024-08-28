@@ -14,7 +14,9 @@ public class BalanceEnquiry extends JFrame implements ActionListener {
     JButton back;
 
     public BalanceEnquiry(String pin) {
+
         this.pin = pin;
+        System.out.println("Pin = "+pin);  //debug statement
 
         setTitle("BALANCE ENQUIRY");
 
