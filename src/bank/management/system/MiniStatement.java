@@ -60,8 +60,12 @@ public class MiniStatement extends JFrame implements ActionListener {
 
         JLabel mini = new JLabel();
         mini.setFont(new Font("Raleway", Font.BOLD, 12));
-        mini.setBounds(20,200, 400, 200);
-        add(mini);
+//        mini.setBounds(20,200, 400, 200);
+//        add(mini);
+
+        JScrollPane scrollPane = new JScrollPane(mini);
+        scrollPane.setBounds(20, 200, 400, 200);
+        add(scrollPane);
 
         JLabel bal = new JLabel();
         bal.setBounds(20, 450, 300, 30);
